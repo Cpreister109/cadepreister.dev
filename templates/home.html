@@ -14,16 +14,20 @@
     </div>
     <div class="slideshow-container">
         <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='images/expense_epicenter.png') }}" style="width:100%">
+            <div class="description">Expense Epicenter - C#/ASP.NET</div>
+        </div>
+        <div class="mySlides fade">
             <img src="{{ url_for('static', filename='images/blog_website.png') }}" style="width:100%">
-            <div class="description">Blog Site</div>
+            <div class="description">Blog Site - Python/Flask</div>
         </div>
         <div class="mySlides fade">
             <img src="{{ url_for('static', filename='images/ToDo_central.png') }}" style="width:100%">
-            <div class="description">Task List Webpage</div>
+            <div class="description">Task List Webpage - Python/Flask</div>
         </div>
         <div class="mySlides fade">
             <img src="{{ url_for('static', filename='images/URL_shortener.png') }}" style="width:100%">
-            <div class="description">URL Shortener</div>
+            <div class="description">URL Shortener - Python/Flask</div>
         </div>
     </div>
 {% endblock %}
