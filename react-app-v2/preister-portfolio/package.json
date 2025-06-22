@@ -42,6 +42,6 @@
     "vite": "^6.3.5"
   },
   "overrides": {
-    "three-bmfont-text": "https://github.com/dmarcos/three-bmfont-text/archive/refs/heads/master.zip"
+    "three-bmfont-text": "git+https://github.com/dmarcos/three-bmfont-text.git"
   }
 }
