@@ -1,20 +1,18 @@
-from flask import Flask
-from flask import render_template
-from flask import url_for, redirect
-
-options = {'Home': 'home', 'About': 'about', 'Projects': 'projects'}
+from flask import Flask, render_template, redirect
 
 app = Flask(__name__, static_url_path='/v1/static')
 
-@app.route('/v1')
+options = {'Home': 'home', 'About': 'about', 'Projects': 'projects'}
+
+@app.route('/')
 def index():
     return render_template('home.html', options=options)
 
-@app.route('/v1/about')
+@app.route('/about')
 def about():
     return render_template('about.html')
 
-@app.route('/v1/projects')
+@app.route('/projects')
 def projects():
     projects_dict = {}
     with open('projects.txt', 'r') as file:
@@ -23,7 +21,7 @@ def projects():
             projects_dict[curr_project[0]] = [curr_project[1], curr_project[2]]
     return render_template('projects.html', projects_dict=projects_dict)
 
-@app.route('/v1/github')
+@app.route('/github')
 def github():
     return redirect('https://github.com/Cpreister109')
 
@@ -36,4 +34,5 @@ def internal_error(e):
     return render_template('500.html'), 500
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
+
