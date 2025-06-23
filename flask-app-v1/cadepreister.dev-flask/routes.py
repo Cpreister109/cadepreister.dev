@@ -4,7 +4,7 @@ from flask import url_for, redirect
 
 options = {'Home': 'home', 'About': 'about', 'Projects': 'projects'}
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/v1/static')
 
 @app.route('/v1')
 def index():
