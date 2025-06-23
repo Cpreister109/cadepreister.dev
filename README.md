@@ -5,7 +5,7 @@ New React & Typescript Application -> https://cadepreister.dev/
 
 
 
-Old Flask Application (currently under contruction) -> https://cadepreister.dev/v1
+Old Flask Application (currently under contruction, here's what it will look like) -> https://cadepreister.dev/v1
 
 
 ![cadepreisterdev1](https://github.com/user-attachments/assets/38fd8c77-7bf8-4158-8fd6-5bdc6d7d7c50)
