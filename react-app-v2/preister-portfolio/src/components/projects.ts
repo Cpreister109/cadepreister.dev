@@ -41,13 +41,13 @@ export const projects = [
     name: "cadepreister .dev\nv2",
     repoUrl: "https://github.com/Cpreister109/preister-portfolio.git",
     imageUrl: cdev2,
-    technologies: ["React", "TypeScript", "TailwindCSS", "Vite", "Docker", "k8s", "AWS"],
+    technologies: ["React", "TypeScript", "TailwindCSS", "Vite", "Docker", "AWS"],
   },
   {      
     name: "cadepreister .dev\nv1",
     repoUrl: "https://github.com/Cpreister109/cadepreister.dev.git",
     imageUrl: cdev1,
-    technologies: ["Python", "Flask", "AWS", "Docker", "k8s"],
+    technologies: ["Python", "Flask", "AWS", "Docker"],
   },
   {      
     name: "Cade Code Share",
