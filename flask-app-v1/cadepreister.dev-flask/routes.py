@@ -1,10 +1,18 @@
 from flask import Flask, render_template, redirect
+import os
 
-app = Flask(__name__, static_url_path='/v1/static')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+app = Flask(
+    __name__,
+    static_url_path='/v1/static',
+    static_folder=os.path.join(BASE_DIR, 'static'),
+    template_folder=os.path.join(BASE_DIR, 'templates')
+)
 
 options = {'Home': 'home', 'About': 'about', 'Projects': 'projects'}
 
-@app.route('/v1/')
+@app.route('/')
 def index():
     return render_template('home.html', options=options)
 
@@ -12,7 +20,7 @@ def index():
 def about():
     return render_template('about.html')
 
-@app.route('/projects')
+@app.route('/v1/projects')
 def projects():
     projects_dict = {}
     with open('projects.txt', 'r') as file:
