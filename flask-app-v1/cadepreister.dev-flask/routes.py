@@ -16,11 +16,11 @@ options = {'Home': 'home', 'About': 'about', 'Projects': 'projects'}
 def index():
     return render_template('home.html', options=options)
 
-@app.route('/v1/about')
+@app.route('/about')
 def about():
     return render_template('about.html')
 
-@app.route('/v1/projects')
+@app.route('/projects')
 def projects():
     projects_dict = {}
     with open('projects.txt', 'r') as file:
@@ -29,7 +29,7 @@ def projects():
             projects_dict[curr_project[0]] = [curr_project[1], curr_project[2]]
     return render_template('projects.html', projects_dict=projects_dict)
 
-@app.route('/v1/github')
+@app.route('/github')
 def github():
     return redirect('https://github.com/Cpreister109')
 
