@@ -2,7 +2,7 @@ body {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     margin: 0;
     padding: 0;
-    background-image: url('/static/images/background.jpg');
+    background-image: url('/v1/static/images/background.jpg');
     color: #ffffff
 }
 
