@@ -8,22 +8,20 @@
 <body>
     <div class="body_container">
         <div>
-            <a href="{{ url_for('v1.index') }}">
+            <a href="{{ url_for('index') }}">
                 <img src="{{ url_for('static', filename='images/website_logo.png') }}" alt="Example Image" class="logo">
             </a>
-            <a class="links_container" href="{{ url_for('v1.index') }}">Home</a>
-            <a class="links_container" href="{{ url_for('v1.projects') }}">Projects</a>
-            <a class="links_container" href="{{ url_for('v1.about') }}">About</a>
-            <a class="links_container" href="{{ url_for('v1.github') }}">Github ↗</a>
+            <a class="links_container" href="{{ url_for('index') }}">Home</a>
+            <a class="links_container" href="{{ url_for('projects') }}">Projects</a>
+            <a class="links_container" href="{{ url_for('about') }}">About</a>
+            <a class="links_container" href="{{ url_for('github') }}">Github ↗</a>
         </div>
 
         <div class="content_container">
             {% block content %}
-            <ul>
-                {% for label, endpoint in options.items() %}
-                    <li><a href="{{ url_for('v1.' + endpoint) }}">{{ label }}</a></li>
-                {% endfor %}
-            </ul>
+            {% for label, endpoint in options.items() %}
+                <li><a href="{{ url_for(endpoint) }}">{{ label }}</a></li>
+            {% endfor %}
             {% endblock %}
 
             {% block scripts %}{% endblock %}

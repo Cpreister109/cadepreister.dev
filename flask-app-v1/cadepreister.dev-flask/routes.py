@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, Blueprint
+from flask import Flask, render_template, redirect
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -10,18 +10,17 @@ app = Flask(
     template_folder=os.path.join(BASE_DIR, 'templates')
 )
 
-bp = Blueprint('v1', __name__, url_prefix='/v1')
 options = {'Home': 'home', 'About': 'about', 'Projects': 'projects'}
 
-@bp.route('/')
+@app.route('/')
 def index():
     return render_template('home.html', options=options)
 
-@bp.route('/about')
+@app.route('/about')
 def about():
     return render_template('about.html')
 
-@bp.route('/projects')
+@app.route('/projects')
 def projects():
     projects_dict = {}
     with open('projects.txt', 'r') as file:
@@ -30,11 +29,9 @@ def projects():
             projects_dict[curr_project[0]] = [curr_project[1], curr_project[2]]
     return render_template('projects.html', projects_dict=projects_dict)
 
-@bp.route('/github')
+@app.route('/github')
 def github():
-    return redirect('https://github.com/Cpreister109')\
-
-app.register_blueprint(bp)
+    return redirect('https://github.com/Cpreister109')
 
 @app.errorhandler(404)
 def not_found(e):
