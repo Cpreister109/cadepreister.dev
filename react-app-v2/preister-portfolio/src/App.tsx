@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { OrbitingNode } from "./components/OrbitingNode";
 import { Node } from "./components/Node";
 import { ShootingStar } from "./components/ShootingStar";
+import { motion, AnimatePresence } from "framer-motion";
 import gitSat from "./assets/git-sat.png";
 import linAst from "./assets/lin-ast.png";
+import RocketLoader from "./components/RocketLoader";
 import generateStars from "./stars";
 import nodeData from "./NodeData";
 import "./App.css";
@@ -16,21 +18,49 @@ function App() {
   );
 
   const [activeNode, setActiveNode] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [showFadeOverlay, setShowFadeOverlay] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const fadeTimer = setTimeout(() => {
+      setShowFadeOverlay(false);
+    }, 2000); // adjust fade duration
+    return () => clearTimeout(fadeTimer);
+  }, []);
+
+  useEffect(() => {
     if (activeNode) {
-      // Simplified condition
-      const timer = setTimeout(() => {
-        navigate(`/${activeNode.toLowerCase()}`);
-      }, 800); // Delay for grow + white transition
-      return () => clearTimeout(timer);
+      const expansionTimer = setTimeout(() => {
+        setLoading(true);
+        const navigationTimer = setTimeout(() => {
+          navigate(`/${activeNode.toLowerCase()}`);
+          setLoading(false);
+        }, 2300);
+        return () => clearTimeout(navigationTimer);
+      }, 100);
+      return () => clearTimeout(expansionTimer);
     }
-  }, [activeNode, navigate]); // Added navigate to dependency array
+  }, [activeNode, navigate]);
 
   return (
-    <div className="starry-bg">
+    <div className="starry-bg relative w-full h-screen overflow-hidden">
+      {loading && <RocketLoader />}
+
+      {/* Initial fade overlay */}
+      <AnimatePresence>
+        {showFadeOverlay && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2 }}
+            className="fixed top-0 left-0 w-full h-full bg-white z-[9999]"
+          />
+        )}
+      </AnimatePresence>
+
       <div className="absolute top-20 left-20 z-20 text-white text-2xl md:text-3xl font-bold futuristic drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]">
         <u>
           The Preister-tary
@@ -42,6 +72,7 @@ function App() {
       <div id="starry-background">
         <ShootingStar />
       </div>
+
       {stars.map((star, index) => (
         <div
           key={index}
@@ -84,7 +115,7 @@ function App() {
               </div>
             </div>
 
-            {/* Render orbit rings only if NO node is active */}
+            {/* Orbit Rings */}
             {nodeData.map(({ label, radius, speed }) => (
               <div
                 key={label}
@@ -97,7 +128,7 @@ function App() {
               />
             ))}
 
-            {/* Render the center node only if NO node is active */}
+            {/* Center Node */}
             <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
               <Node
                 label="Cade Preister"
@@ -109,7 +140,7 @@ function App() {
           </>
         )}
 
-        {/* Render orbiting nodes */}
+        {/* Orbiting Nodes */}
         {nodeData.map(({ label, radius, speed, content }) => {
           if (activeNode === label || !activeNode) {
             return (
@@ -124,7 +155,7 @@ function App() {
               />
             );
           }
-          return null; // Don't render other nodes
+          return null;
         })}
       </div>
     </div>

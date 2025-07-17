@@ -11,7 +11,7 @@ const techStack = {
     "devicon-csharp-plain colored",
     "devicon-c-plain colored",
     "devicon-java-plain colored",
-    "devicon-postgresql-plain colored",
+    "devicon-mysql-original colored",
     "devicon-bash-plain colored",
   ],
   frameworks: [
